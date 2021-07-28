@@ -1,0 +1,146 @@
+@import '../utils/libs'
+@import '../utils/reset'
+
+@import 'variables'
+@import 'mixins'
+
+//Базовые стили
+html
+  scroll-behavior: smooth
+html, body
+  min-height: 100%
+  height: 100%
+  width: 100%
+body
+  height: auto
+  font-family: $font
+  @include adaptive-font(16,14)
+  color: $fontcolor
+  background: $bodyBgColor
+*,
+*:before,
+*:after
+  box-sizing: border-box
+
+a
+  &:hover,:active,:target,:focus
+    text-decoration: none
+button
+  outline: none
+  background: transparent
+  &:hover,&:focus,&:active
+    outline: none
+    background: transparent
+/*Новые стили для скролла*/
+::-webkit-scrollbar
+  width: 4px
+  height: 4px
+  border-radius: 5px
+  background-color: #C4C4C4
+
+::-webkit-scrollbar-thumb
+  border-radius: 10px
+  position: relative
+  background: $scrollbarColor
+#app
+  display: flex
+  flex-direction: column
+  //width: 100%
+  min-height: 100vh
+  height: 100%
+  overflow-x: hidden
+.content
+  flex: 1 1 auto
+
+#red .ui-slider-range
+  background: #ef2929
+#red .ui-slider-handle
+  border-color: #ef2929
+#green .ui-slider-range
+  background: #8ae234
+#green .ui-slider-handle
+  border-color: #8ae234
+#blue .ui-slider-range
+  background: #729fcf
+#blue .ui-slider-handle
+  border-color: #729fcf
+.change
+  width: 100%
+  padding: 16px
+  margin: 50px auto 0
+  &__btns-row
+    position: relative
+    padding: 16px
+    margin-bottom: 18px
+    border: 2px solid #333
+    & > form
+      display: flex
+      justify-content: flex-start
+  &__selected-title
+    position: absolute
+    left: 10px
+    top: -16px
+    z-index: 1
+    display: flex
+    align-items: center
+    justify-content: center
+    padding: 0 8px
+    color: #000
+    background: #fff
+  &__body
+    display: flex
+    justify-content: space-between
+  &__col
+    width: 100%
+    max-width: 48%
+    &:first-child
+      margin-right: 16px
+  &__slider
+    &:not(:last-child)
+      margin-bottom: 16px
+
+.radio-btn
+  position: absolute
+  left: -99999em
+  top: -99999em
+  &__wrapper:first-child
+    margin-right: 16px
+  & + label
+    position: relative
+    padding: 16px
+    font-weight: 700
+    border: 1px solid #333
+    border-radius: 5px
+    background: rgba(0,0,0,.04)
+    cursor: pointer
+    &:hover
+      color: #fff
+      background-color: #5089C6
+      border-color: #5089C6
+  &:checked + label
+    color: #fff
+    background: #5089C6
+    border-color: #5089C6
+.swatch
+  display: flex
+  align-items: center
+  justify-content: center
+  width: 100%
+  margin: 0 auto
+  padding: 16px
+  background: rgba(141,103,231,.3)
+  border: 1px solid #333
+  border-radius:
+  &__text
+    font-size: 24px
+    font-weight: 700
+    color: #C400FF
+
+
+
+
+
+
+
+
+@import 'media'
