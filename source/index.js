@@ -1,31 +1,48 @@
-// JS
-import './js/'
 
-// SCSS
-import './assets/scss/main.scss'
+$( function() {
+  let radios = $('input[type=radio][name="colorBtn"]');
+  let colorResult = '';
 
-// CSS (example)
-// import './assets/css/main.css'
+  function hexFromRGB(r, g, b) {
+    let hex = [
+      r.toString( 16 ),
+      g.toString( 16 ),
+      b.toString( 16 )
+    ];
+    $.each( hex, function( nr, val ) {
+      if ( val.length === 1 ) {
+        hex[ nr ] = "0" + val;
+      }
+    });
+    return hex.join( "" ).toUpperCase();
+  }
 
-// Vue.js
-window.Vue = require('vue')
+  function refreshSwatch(){
+    let red = $( "#red" ).slider( "value" ),
+      green = $( "#green" ).slider( "value" ),
+      blue = $( "#blue" ).slider( "value" );
+      colorResult = hexFromRGB( red, green, blue );
 
-// Vue components (for use in html)
-import VueSlider from 'vue-slider-component'
-import 'vue-slider-component/theme/antd.css'
-Vue.component('VueSlider', VueSlider)
-
-import Drawer from "vue-simple-drawer"
-
-Vue.component('example-component', require('./js/components/Example.vue').default)
-
-
-// Vue init
-const app = new Vue({
-  el: '#app',
-  data() {
-    return {
-      show: false
+    for (let radio of radios){
+      if (($(radio).is(':checked')) && radio.value == 'color'){
+        $( ".swatch__text" ).css( "color", "#" + colorResult );
+      }else if (($(radio).is(':checked')) && radio.value == 'bgColor'){
+        $( ".swatch" ).css( "background-color", "#" + colorResult );
+      }
     }
-  },
-})
+  }
+
+  $( "#red, #green, #blue").slider({
+    orientation: "horizontal",
+    range: "min",
+    max:255,
+    value: 20,
+    slide: refreshSwatch,
+    change: refreshSwatch
+  });
+
+  $("#red").slider("value", 255);
+  $("#green").slider("value", 140);
+  $("#blue").slider("value", 60);
+
+});
